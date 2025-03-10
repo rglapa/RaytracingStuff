@@ -6,6 +6,7 @@
 #define HITTABLE_H
 
 #include "ray.h"
+#include "aabb.h"
 
 class material;
 
@@ -15,6 +16,8 @@ public:
     vec3 normal;
     shared_ptr<material> mat;
     double t;
+    double u;
+    double v;
     hit_record(): t(0.0), front_face(false) {}
     bool front_face;
 
@@ -30,6 +33,8 @@ protected:
 
 public:
     virtual bool hit(const ray& r, interval ray_t, hit_record& rec) const = 0;
+
+    virtual aabb bounding_box() const = 0;
 };
 
 #endif //HITTABLE_H
